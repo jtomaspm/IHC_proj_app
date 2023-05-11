@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Modal, ScrollView } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { Button } from 'react-native-paper';
+import { Button, useTheme } from 'react-native-paper';
 
 
 export default function DispositivosScreen() {
@@ -89,6 +89,8 @@ export default function DispositivosScreen() {
   );
 }
 
+const theme = useTheme();
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -169,10 +171,9 @@ const styles = StyleSheet.create({
   },
   id: {
     fontWeight: 'bold',
-    color: 'black',
     height: 50,
     marginLeft: 100,
-
+    color: theme.colors.onSurface,
   },
   dispositivos: {
     marginRight: '40%',
