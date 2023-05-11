@@ -11,7 +11,7 @@ export default function DispositivosScreen() {
   const [dispositivos, setDispositivos] = useState([]);
   let colorText = 'white';
   const theme = useTheme();
-  if (theme.colors.primary === "rgb(121, 69, 172)") {
+  if (theme.colors.primary === "rgb(120, 69, 172)") {
     colorText = "black";
   }
   
