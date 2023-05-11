@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Modal, ScrollView } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Button, useTheme } from 'react-native-paper';
@@ -9,6 +9,106 @@ export default function DispositivosScreen() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(null);
   const [dispositivos, setDispositivos] = useState([]);
+  let colorText = 'white';
+  const theme = useTheme();
+  if (theme.colors.primary === "rgb(121, 69, 172)") {
+    colorText = "black";
+  }
+  
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: 'center',
+    },
+    title: {
+      fontSize: 40,
+      fontWeight: 'bold',
+    },
+    floatingButton: {
+      position: 'absolute',
+      bottom: 20,
+      right: 20,
+      width: 50,
+      height: 50,
+      backgroundColor: '#2196F3',
+      borderRadius: 25,
+      justifyContent: 'center',
+      alignItems: 'center',
+      elevation: 5,
+    },
+    floatingButtonText: {
+      color: '#fff',
+      fontSize: 25,
+    },
+    modalBackground: {
+      flex: 1,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    modalContent: {
+      backgroundColor: '#fff',
+      width: '80%',
+      padding: 20,
+      borderRadius: 10,
+      elevation: 5,
+    },
+    modalTitle: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      marginBottom: 20,
+      color: colorText,
+    },
+    addButton: {
+      backgroundColor: '#2196F3',
+      borderRadius: 5,
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      marginTop: 20,
+      alignSelf: 'flex-end',
+    },
+
+    closeButton: {
+      position: 'absolute',
+      top: 10,
+      right: 10,
+      width: 40,
+      height: 40,
+      borderRadius: 35,
+      backgroundColor: 'gray',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    closeButtonText: {
+      color: 'white',
+      fontSize: 25,
+      marginTop: '10%',
+      fontWeight: 'bold',
+    },
+    remover: {
+      backgroundColor: 'red',
+      borderRadius: 35,
+      color: 'white',
+      width: 90,
+      textAlign: 'center',
+      lineHeight: 40,
+    },
+    id: {
+      fontWeight: 'bold',
+      height: 50,
+      marginLeft: 100,
+      color: colorText,
+    },
+    dispositivos: {
+      color: colorText,
+      marginRight: '40%',
+      textAlign: 'center',
+    },
+    addButtonLabel: {
+      color: '#fff',
+      fontWeight: 'bold'
+    }
+  });
 
   const handleAddButtonPress = () => {
     if (selectedValue) {
@@ -33,9 +133,9 @@ export default function DispositivosScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>DISPOSITIVOS</Text>
       {/* Este vai ser o container do nome do dispositivo e do botao remover */}
-      <View style={styles.dispositivos}>
+      <View >
         {dispositivos.map((dispositivo, index) => (
-          <Text key={index}> {dispositivo.tipo}
+          <Text style={styles.dispositivos} key={index}> {dispositivo.tipo}
             <View>
             <Text style={styles.remover} onPress={() => handleRemoveButtonPress(index)}>Remover</Text>
             </View>
@@ -89,99 +189,3 @@ export default function DispositivosScreen() {
   );
 }
 
-const theme = useTheme();
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 40,
-    fontWeight: 'bold',
-  },
-  floatingButton: {
-    position: 'absolute',
-    bottom: 20,
-    right: 20,
-    width: 50,
-    height: 50,
-    backgroundColor: '#2196F3',
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 5,
-  },
-  floatingButtonText: {
-    color: '#fff',
-    fontSize: 25,
-  },
-  modalBackground: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  modalContent: {
-    backgroundColor: '#fff',
-    width: '80%',
-    padding: 20,
-    borderRadius: 10,
-    elevation: 5,
-  },
-  modalTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  addButton: {
-    backgroundColor: '#2196F3',
-    borderRadius: 5,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    marginTop: 20,
-    alignSelf: 'flex-end',
-  },
-
-  closeButton: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    width: 40,
-    height: 40,
-    borderRadius: 35,
-    backgroundColor: 'gray',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  closeButtonText: {
-    color: 'white',
-    fontSize: 25,
-    marginTop: '10%',
-    fontWeight: 'bold',
-  },
-  remover: {
-    backgroundColor: 'red',
-    borderRadius: 35,
-    color: 'white',
-    width: 90,
-    textAlign: 'center',
-    lineHeight: 40,
-  },
-  id: {
-    fontWeight: 'bold',
-    height: 50,
-    marginLeft: 100,
-    color: theme.colors.onSurface,
-  },
-  dispositivos: {
-    color: 'black',
-    marginLeft: 100,
-    marginRight: '40%',
-    marginTop: 100,
-  },
-  addButtonLabel: {
-    color: '#fff',
-    fontWeight: 'bold'
-  }
-});
