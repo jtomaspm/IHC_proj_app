@@ -35,10 +35,9 @@ export default function DispositivosScreen() {
       {/* Este vai ser o container do nome do dispositivo e do botao remover */}
       <View style={styles.dispositivos}>
         {dispositivos.map((dispositivo, index) => (
-          <Text style={styles.id}> {dispositivo.tipo}
+          <Text key={index} style={styles.id}> {dispositivo.tipo}
             <View>
             <Text style={styles.remover} onPress={() => handleRemoveButtonPress(index)}>Remover</Text>
-
             </View>
           </Text>
 
@@ -94,13 +93,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
   },
   title: {
     fontSize: 40,
     fontWeight: 'bold',
-    marginBottom: 500,
-    position: 'absolute',
   },
   floatingButton: {
     position: 'absolute',
@@ -165,11 +161,9 @@ const styles = StyleSheet.create({
   remover: {
     backgroundColor: 'red',
     borderRadius: 35,
-    marginLeft: '1000%',
-    fontWeight: 'bold',
+    marginLeft: 100,
     color: 'white',
     width: 90,
-    height: 40,
     textAlign: 'center',
     lineHeight: 40,
   },
@@ -177,6 +171,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'black',
     height: 50,
+    marginLeft: 100,
+
   },
   dispositivos: {
     marginRight: '40%',
