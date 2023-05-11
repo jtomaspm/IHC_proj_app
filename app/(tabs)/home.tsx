@@ -1,13 +1,7 @@
 import { StyleSheet, TouchableOpacity, Pressable, useColorScheme } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Link } from 'expo-router';
-import EditScreenInfo from '../../components/EditScreenInfo';
-import { Text, View } from '../../components/Themed';
-import { Button, TextInput } from 'react-native-paper';
-
-
-// const navigation = useNavigation();
-
+import { View } from '../../components/Themed';
+import { Button } from 'react-native-paper';
 
 export default function TabOneScreen() {
   const navigation = useNavigation();
@@ -37,19 +31,19 @@ export default function TabOneScreen() {
       <View
         style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
         <TouchableOpacity onPress={medicos}>
-          <Button style={{ padding: 16, width: '140%', marginLeft: '-20%' }} mode='contained'>Médicos</Button>
+          <Button style={{ padding: 16, width: '100%' }} mode='contained'>Médicos</Button>
         </TouchableOpacity>
       </View>
       <View
         style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
         <TouchableOpacity onPress={consultas}>
-          <Button style={{ padding: 16, width: '130%', marginLeft: '-15%' }} mode='contained'>Consultas</Button>
+          <Button style={{ padding: 16, width: '100%' }} mode='contained'>Consultas</Button>
         </TouchableOpacity>
       </View>
       <View
         style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
         <TouchableOpacity onPress={dispositivos}>
-          <Button style={{ padding: 16, width: '120%', marginLeft: '-10%' }} mode='contained'>Dispositivos</Button>
+          <Button style={{ padding: 16, width: '100%' }} mode='contained'>Dispositivos</Button>
         </TouchableOpacity>
       </View>
     </View>
