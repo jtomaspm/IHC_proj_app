@@ -35,7 +35,7 @@ export default function DispositivosScreen() {
       {/* Este vai ser o container do nome do dispositivo e do botao remover */}
       <View style={styles.dispositivos}>
         {dispositivos.map((dispositivo, index) => (
-          <Text key={index} style={styles.id}> {dispositivo.tipo}
+          <Text key={index}> {dispositivo.tipo}
             <View>
             <Text style={styles.remover} onPress={() => handleRemoveButtonPress(index)}>Remover</Text>
             </View>
@@ -68,7 +68,7 @@ export default function DispositivosScreen() {
 
             <DropDownPicker
               items={[
-                { label: 'Relógio', value: 'Relógio' },
+                { label: 'Relógio ', value: 'Relógio ' },
                 { label: 'Pulseira', value: 'Pulseira' },
               ]}
               placeholder="Selecione o tipo de dispositivo"
@@ -163,7 +163,6 @@ const styles = StyleSheet.create({
   remover: {
     backgroundColor: 'red',
     borderRadius: 35,
-    marginLeft: 100,
     color: 'white',
     width: 90,
     textAlign: 'center',
@@ -176,7 +175,10 @@ const styles = StyleSheet.create({
     color: theme.colors.onSurface,
   },
   dispositivos: {
+    color: 'black',
+    marginLeft: 100,
     marginRight: '40%',
+    marginTop: 100,
   },
   addButtonLabel: {
     color: '#fff',
