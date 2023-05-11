@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Modal, ScrollView } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { Button } from 'react-native-paper';
+
 
 export default function DispositivosScreen() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -34,11 +36,10 @@ export default function DispositivosScreen() {
       <View style={styles.dispositivos}>
         {dispositivos.map((dispositivo, index) => (
           <Text style={styles.id}> {dispositivo.tipo}
-            <TouchableOpacity onPress={() => handleRemoveButtonPress(index)} >
-              <Text style={styles.remover}>
-                Remover
-              </Text>
-            </TouchableOpacity>
+            <View>
+            <Text style={styles.remover} onPress={() => handleRemoveButtonPress(index)}>Remover</Text>
+
+            </View>
           </Text>
 
         ))}
@@ -79,7 +80,6 @@ export default function DispositivosScreen() {
               value={selectedValue}
               setValue={setSelectedValue}
             />
-
             <TouchableOpacity style={styles.addButton} onPress={handleAddButtonPress}>
               <Text style={styles.addButtonLabel}>Adicionar</Text>
             </TouchableOpacity>
