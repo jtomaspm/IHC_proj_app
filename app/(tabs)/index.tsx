@@ -1,36 +1,56 @@
-import { StyleSheet } from 'react-native';
-
+import { StyleSheet, TouchableOpacity, Pressable, useColorScheme } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Link } from 'expo-router';
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { Text, View } from '../../components/Themed';
-import { Button } from 'react-native-paper';
+import { Button, TextInput } from 'react-native-paper';
+
+
+// const navigation = useNavigation();
 
 
 export default function TabOneScreen() {
+  const navigation = useNavigation();
+  const dados = () => {
+    navigation.navigate('dados'); // substitua 'NovaPagina' pelo nome da sua nova página
+  };
+  const medicos = () => {
+    navigation.navigate('medicos'); // substitua 'NovaPagina' pelo nome da sua nova página
+  };
+  const consultas = () => {
+    navigation.navigate('consultas'); // substitua 'NovaPagina' pelo nome da sua nova página
+  };
+  const dispositivos = () => {
+    navigation.navigate('dispositivos'); // substitua 'NovaPagina' pelo nome da sua nova página
+  };
+
   return (
     <View style={styles.container}>
+
       <View
-        style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-        darkColor="rgba(255,255,255,0.05)"
-        lightColor="rgba(0,0,0,0.05)">
-        <Button mode='contained'>Passos</Button>
+        style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
+        <TouchableOpacity onPress={dados}>
+          <Button style={{ padding: 16, width: '100%' }} mode='contained'>Dados de Saúde</Button>
+        </TouchableOpacity>
+
       </View>
       <View
-        style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-        darkColor="rgba(255,255,255,0.05)"
-        lightColor="rgba(0,0,0,0.05)">
-        <Button mode='contained'>Calorias</Button>
+        style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
+        <TouchableOpacity onPress={medicos}>
+          <Button style={{ padding: 16, width: '140%', marginLeft: '-20%' }} mode='contained'>Médicos</Button>
+        </TouchableOpacity>
       </View>
       <View
-        style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-        darkColor="rgba(255,255,255,0.05)"
-        lightColor="rgba(0,0,0,0.05)">
-        <Button mode='contained'>Pressão Sanguínea</Button>
+        style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
+        <TouchableOpacity onPress={consultas}>
+          <Button style={{ padding: 16, width: '130%', marginLeft: '-15%' }} mode='contained'>Consultas</Button>
+        </TouchableOpacity>
       </View>
       <View
-        style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-        darkColor="rgba(255,255,255,0.05)"
-        lightColor="rgba(0,0,0,0.05)">
-        <Button mode='contained'>Pulsassão</Button>
+        style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
+        <TouchableOpacity onPress={dispositivos}>
+          <Button style={{ padding: 16, width: '120%', marginLeft: '-10%' }} mode='contained'>Dispositivos</Button>
+        </TouchableOpacity>
       </View>
     </View>
   );
