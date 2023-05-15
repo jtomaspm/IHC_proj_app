@@ -7,7 +7,6 @@ import { Button, useTheme } from 'react-native-paper';
 export default function MedicosScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(null);
   const [medicos, setMedicos] = useState([]);
   const [medicoName, setMedicoName] = useState('');
   const [medicoSpecialty, setMedicoSpecialty] = useState('');
@@ -17,16 +16,14 @@ export default function MedicosScreen() {
   
 
   const handleAddButtonPress = () => {
-    if (selectedValue && medicoName && medicoSpecialty && medicoContact) {
+    if (medicoName && medicoSpecialty && medicoContact) {
       const medico= {
         id: medicos.length + 1,
-        tipo: selectedValue,
         nome: medicoName,
         especialidade: medicoSpecialty,
         contacto: medicoContact,
       }
       setMedicos([...medicos, medicos]);
-      setSelectedValue(null);
       setMedicoName('');
       setMedicoSpecialty('');
       setMedicoContact('');
@@ -45,17 +42,15 @@ export default function MedicosScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>Médicos</Text>
       {/* Este vai ser o container do nome do dispositivo e do botao remover */}
-      <View style={styles.medicos}>
+      <View >
         {medicos.map((medico, index) => (
           <View style={styles.medicoContainer} key={medico.id}>
             <Text style={styles.medicoName}>{medico.nome}</Text>
             <Text style={styles.medicoSpecialty}>{medico.especialidade}</Text>
             <Text style={styles.medicoType}>{medico.tipo}</Text>
-            <TouchableOpacity onPress={() => handleRemoveButtonPress(index)} >
-              <Text style={styles.remover}>
-                Remover
-              </Text>
-            </TouchableOpacity>
+            <View>
+              <Text style={styles.remover} onPress={() => handleRemoveButtonPress(index)}>Remover</Text>
+            </View>
           </View>
 
         ))}
@@ -95,7 +90,7 @@ export default function MedicosScreen() {
 
             <View style={styles.container}>
             <Text style={styles.label}>Especialidade: </Text>
-              <TextInput style={styles.subTitle} value={medicoContact} onChangeText={setMedicoSpecialty} />
+              <TextInput style={styles.subTitle} value={medicoSpecialty} onChangeText={setMedicoSpecialty} />
             </View>
 
             <TouchableOpacity style={styles.addButton} onPress={handleAddButtonPress}>
@@ -151,7 +146,6 @@ const styles = StyleSheet.create({
     },
     modalContent: {
       backgroundColor: '#fff',
-      width: '80%',
       padding: 20,
       borderRadius: 10,
       elevation: 5,
@@ -196,17 +190,6 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       lineHeight: 40,
     },
-    id: {
-      fontWeight: 'bold',
-      height: 50,
-      marginLeft: 100,
-      color: 'white',
-    },
-    dispositivos: {
-      color: 'white',
-      marginRight: '40%',
-      textAlign: 'center',
-    },
     addButtonLabel: {
       color: '#fff',
       fontWeight: 'bold'
@@ -215,8 +198,5 @@ const styles = StyleSheet.create({
       fontSize: 18,
       marginBottom: 5,
       alignSelf: 'flex-start',
-    },
-    medicos: {
-      marginRight: '40%',
     },
   });
