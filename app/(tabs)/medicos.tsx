@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link, Stack } from 'expo-router';
 import { StyleSheet, Text, TouchableOpacity, View, Modal, ScrollView, TextInput } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Button, useTheme } from 'react-native-paper';
@@ -29,6 +30,7 @@ export default function MedicosScreen() {
       setMedicoContact('');
       setDropdownOpen(false);
       setModalVisible(false);
+      
     }
   };
 
@@ -112,15 +114,17 @@ const styles = StyleSheet.create({
     title: {
       fontSize: 40,
       fontWeight: 'bold',
+      color: 'white',
+      marginTop: 10,
     },
     subTitle: {
+      borderStyle: 'solid',
       fontSize: 18,
       marginBottom: 1,
-      backgroundColor: '#fff',
+      backgroundColor: 'gray',
       width: '100%',
       padding: 5,
       borderRadius: 10,
-  
     },
     floatingButton: {
       position: 'absolute',
@@ -145,16 +149,18 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     modalContent: {
+      marginTop: 50,
+      marginBottom: 50,
+      alignItems: 'flex-start',
       backgroundColor: '#fff',
       padding: 20,
-      borderRadius: 10,
-      elevation: 5,
+      elevation: 1,
     },
     modalTitle: {
       fontSize: 20,
       fontWeight: 'bold',
       marginBottom: 20,
-      color: 'white',
+      color: 'black',
     },
     addButton: {
       backgroundColor: '#2196F3',
