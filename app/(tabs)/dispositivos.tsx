@@ -12,7 +12,7 @@ export default function DispositivosScreen() {
   let colorText = 'white';
   const theme = useTheme();
   if (theme.colors.primary === "rgb(120, 69, 172)") {
-    colorText = "black";
+    colorText = "white";
   }
   
   const styles = StyleSheet.create({
@@ -23,6 +23,7 @@ export default function DispositivosScreen() {
     title: {
       fontSize: 40,
       fontWeight: 'bold',
+      color: 'white',
     },
     floatingButton: {
       position: 'absolute',
@@ -131,7 +132,7 @@ export default function DispositivosScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>DISPOSITIVOS</Text>
+      <Text style={styles.title}>Dispositivos</Text>
       {/* Este vai ser o container do nome do dispositivo e do botao remover */}
       <View >
         {dispositivos.map((dispositivo, index) => (
