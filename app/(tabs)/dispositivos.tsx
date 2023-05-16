@@ -102,12 +102,18 @@ export default function DispositivosScreen() {
     },
     dispositivos: {
       color: colorText,
-      marginRight: '40%',
-      textAlign: 'center',
+      marginRight: 20,
     },
     addButtonLabel: {
       color: '#fff',
       fontWeight: 'bold'
+    },
+    divContent: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      textAlign: 'center',
+      alignItems: 'center',
     }
   });
 
@@ -136,12 +142,10 @@ export default function DispositivosScreen() {
       {/* Este vai ser o container do nome do dispositivo e do botao remover */}
       <View >
         {dispositivos.map((dispositivo, index) => (
-          <Text style={styles.dispositivos} key={index}> {dispositivo.tipo}
-            <View>
-            <Text style={styles.remover} onPress={() => handleRemoveButtonPress(index)}>Remover</Text>
-            </View>
-          </Text>
-
+          <View style={styles.divContent}>
+            <Text style={styles.dispositivos} key={index}> {dispositivo.tipo}</Text>
+            <Button mode='contained' onPress={() => handleRemoveButtonPress(index)}>Remover</Button>
+          </View>
         ))}
       </View>
 
