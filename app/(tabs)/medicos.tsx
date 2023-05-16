@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Stack } from 'expo-router';
+import { Link, Stack, useNavigation } from 'expo-router';
 import { StyleSheet, Text, TouchableOpacity, View, Modal, ScrollView, TextInput } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Button, useTheme } from 'react-native-paper';
@@ -13,6 +13,9 @@ export default function MedicosScreen() {
   const [medicoSpecialty, setMedicoSpecialty] = useState('');
   const [medicoContact, setMedicoContact] = useState('');;
   const theme = useTheme();
+
+  const navigation = useNavigation();
+  navigation.setOptions({ headerTitle: 'Voltar' });
   
   
 

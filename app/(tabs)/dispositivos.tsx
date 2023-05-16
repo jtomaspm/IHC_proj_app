@@ -1,3 +1,4 @@
+import { useNavigation } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Modal, ScrollView } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -14,7 +15,9 @@ export default function DispositivosScreen() {
   if (theme.colors.primary === "rgb(120, 69, 172)") {
     colorText = "white";
   }
+  const navigation = useNavigation();
   
+  navigation.setOptions({ headerTitle: 'Voltar' });
   const styles = StyleSheet.create({
     container: {
       flex: 1,

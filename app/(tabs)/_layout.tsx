@@ -1,5 +1,5 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Stack, Tabs } from 'expo-router';
+import { Link, Stack, Tabs, useNavigation } from 'expo-router';
 import { Pressable, useColorScheme } from 'react-native';
 
 import Colors from '../../constants/Colors';
@@ -17,10 +17,12 @@ function TabBarIcon(props: {
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const navigation = useNavigation();
+  navigation.setOptions({ headerTitle: 'Voltar' });
 
   return (
     <PaperProvider>
-    <Stack initialRouteName="home"/>
+    <Stack initialRouteName="index"/>
     </PaperProvider>
   );
 }

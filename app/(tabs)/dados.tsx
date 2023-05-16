@@ -5,6 +5,7 @@ import { Button } from 'react-native-paper';
 
 export default function DispositivosScreen() {
   const navigation = useNavigation();
+  navigation.setOptions({ headerTitle: 'Voltar' });
   const passos = () => {
     navigation.navigate('saude/passos'); // substitua 'NovaPagina' pelo nome da sua nova página
   };

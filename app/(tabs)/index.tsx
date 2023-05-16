@@ -5,6 +5,7 @@ import { Button } from 'react-native-paper';
 
 export default function TabOneScreen() {
   const navigation = useNavigation();
+  navigation.setOptions({ headerTitle: '' });
   const dados = () => {
     navigation.navigate('dados'); // substitua 'NovaPagina' pelo nome da sua nova página
   };

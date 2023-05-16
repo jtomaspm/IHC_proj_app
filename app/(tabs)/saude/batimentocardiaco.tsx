@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { DataTable } from 'react-native-paper';
 import { HealthDataService, WeekData } from '../../../services/HealthDataService';
+import { useNavigation } from 'expo-router';
 
 const BatimentoScreen = () => {
   const service = new HealthDataService(65);
   const [data, setData] = React.useState<WeekData>();
+  const navigation = useNavigation();
+  navigation.setOptions({ headerTitle: 'Voltar' });
   React.useState(() => {
     setData(service.HeartRate(new Date()));
   }, []);
