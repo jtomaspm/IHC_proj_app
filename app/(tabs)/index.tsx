@@ -21,10 +21,10 @@ export default function TabOneScreen() {
 
   return (
     <View style={{...styles.container}}>
-          <Button style={{ padding: 16, width: '50%', margin: 10 }} mode='contained' onPress={dados}>Dados de Saúde</Button>
-          <Button style={{ padding: 16, width: '50%', margin: 10 }} mode='contained' onPress={medicos}>Médicos</Button>
-          <Button style={{ padding: 16, width: '50%', margin: 10 }} mode='contained' onPress={consultas}>Consultas</Button>
-          <Button style={{ padding: 16, width: '50%', margin: 10 }} mode='contained' onPress={dispositivos}>Dispositivos</Button>
+          <Button style={{ paddingBottom: 16, paddingTop : 16, width: '60%', margin:10 }} mode='contained' onPress={dados}>Dados de Saúde</Button>
+          <Button style={{ paddingBottom: 16, paddingTop : 16, width: '60%', margin:10 }} mode='contained' onPress={medicos}>Médicos</Button>
+          <Button style={{ paddingBottom: 16, paddingTop : 16, width: '60%', margin:10 }} mode='contained' onPress={consultas}>Consultas</Button>
+          <Button style={{ paddingBottom: 16, paddingTop : 16, width: '60%', margin:10 }} mode='contained' onPress={dispositivos}>Dispositivos</Button>
     </View>
   );
 }

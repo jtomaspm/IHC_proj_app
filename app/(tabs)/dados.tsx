@@ -21,10 +21,10 @@ export default function DispositivosScreen() {
 
   return (
     <View style={styles.container}>
-          <Button style={{ padding: 16, width: '50%', margin:10 }} mode='contained' onPress={passos}>Passos : 3452</Button>
-          <Button style={{ padding: 16, width: '50%', margin:10 }} mode='contained' onPress={batimentocardiaco}>Batimento Cardíaco : 80</Button>
-          <Button style={{ padding: 16, width: '50%', margin:10 }} mode='contained' onPress={calorias}>Calorias : 2489</Button>
-          <Button style={{ padding: 16, width: '50%', margin:10 }} mode='contained' onPress={sono}>Sono : 7h</Button>
+          <Button style={{ paddingBottom: 16, paddingTop : 16, width: '60%', margin:10 }} mode='contained' onPress={passos}>Passos : 3452</Button>
+          <Button style={{ paddingBottom: 16, paddingTop : 16, width: '60%', margin:10 }} mode='contained' onPress={batimentocardiaco}>Batimento Cardíaco : 80</Button>
+          <Button style={{ paddingBottom: 16, paddingTop : 16, width: '60%', margin:10 }} mode='contained' onPress={calorias}>Calorias : 2489</Button>
+          <Button style={{ paddingBottom: 16, paddingTop : 16, width: '60%', margin:10 }} mode='contained' onPress={sono}>Sono : 7h</Button>
     </View>
   );
 

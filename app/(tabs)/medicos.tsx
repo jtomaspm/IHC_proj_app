@@ -72,38 +72,25 @@ export default function MedicosScreen() {
         animationType='fade'
         onRequestClose={() => setModalVisible(false)}
       >
-        <TouchableOpacity
-          style={styles.modalBackground}
-          activeOpacity={1}
-          onPress={() => setDropdownOpen(false)}
-        >
-          <View style={styles.modalContent}>
-            <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisible(false)}>
-              <Text style={styles.closeButtonText}>X</Text>
-            </TouchableOpacity>
-            <Text style={styles.modalTitle}>Adicionar médico</Text>
+        <View style={{backgroundColor:"white", margin:10, marginTop:"20%"}}>
 
-            <View style={styles.container}>
-              <Text style={styles.label}>Nome: </Text>
-              <TextInput style={styles.subTitle} value={medicoName} onChangeText={setMedicoName} />
-            </View>
+            <Button style={{width:10, alignSelf:"flex-end"}} onPress={() => setModalVisible(false)} mode='contained'>X</Button>
+            <Text style={{...styles.titleModal}}>Adicionar médico</Text>
 
-            <View style={styles.container}>
-            <Text style={styles.label}>Contacto: </Text>
-              <TextInput style={styles.subTitle} value={medicoContact} onChangeText={setMedicoContact} />
-            </View>
+              <Text  style={{...styles.label}}>Nome: </Text>
+              <TextInput style={styles.inputs} value={medicoName} onChangeText={setMedicoName} />
 
-            <View style={styles.container}>
-            <Text style={styles.label}>Especialidade: </Text>
-              <TextInput style={styles.subTitle} value={medicoSpecialty} onChangeText={setMedicoSpecialty} />
-            </View>
+            <Text style={styles.label} >Contacto: </Text>
+              <TextInput  style={styles.inputs} value={medicoContact} onChangeText={setMedicoContact} />
 
-            <TouchableOpacity style={styles.addButton} onPress={handleAddButtonPress}>
-              <Text style={styles.addButtonLabel}>Adicionar</Text>
-            </TouchableOpacity>
+            <Text style={styles.label} >Especialidade: </Text>
+              <TextInput style={styles.inputs} value={medicoSpecialty} onChangeText={setMedicoSpecialty} />
 
-          </View>
-        </TouchableOpacity>
+              <Button style={{width:"60%", alignSelf:"center", margin:20}} onPress={() => {
+                handleAddButtonPress();
+                }} mode='contained'>Adicionar</Button>
+
+        </View>
       </Modal>
     </View>
   );
@@ -120,13 +107,20 @@ const styles = StyleSheet.create({
       color: 'black',
       marginTop: 10,
     },
-    subTitle: {
+    titleModal: {
+      fontSize: 30,
+      fontWeight: 'bold',
+      color: 'black',
+      marginTop: 10,
+      textAlign: 'center',
+    },
+    inputs: {
       borderStyle: 'solid',
       fontSize: 18,
-      marginBottom: 1,
       backgroundColor: 'gray',
       width: '100%',
       padding: 5,
+      margin : 2,
       borderRadius: 10,
     },
     floatingButton: {
@@ -205,7 +199,5 @@ const styles = StyleSheet.create({
     },
     label: {
       fontSize: 18,
-      marginBottom: 5,
-      alignSelf: 'flex-start',
     },
   });
