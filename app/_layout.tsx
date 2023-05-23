@@ -87,8 +87,8 @@ function RootLayoutNav() {
 
   return (
     <>
-      <ThemeProvider value={theme}>
-      <PaperProvider theme={theme}>
+      <ThemeProvider value={DefaultTheme}>
+      <PaperProvider theme={DefaultTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
