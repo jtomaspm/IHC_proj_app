@@ -105,7 +105,8 @@ export default function DispositivosScreen() {
     },
     dispositivos: {
       color: "black",
-      marginRight: 20,
+      marginRight: 150,
+      fontSize: 25,
     },
     addButtonLabel: {
       color: '#fff',
@@ -117,6 +118,7 @@ export default function DispositivosScreen() {
       justifyContent: 'space-around',
       textAlign: 'center',
       alignItems: 'center',
+      marginTop: 25,
     }
   });
 
