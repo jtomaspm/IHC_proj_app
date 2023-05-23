@@ -21,32 +21,10 @@ export default function DispositivosScreen() {
 
   return (
     <View style={styles.container}>
-
-      <View
-        style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-        <TouchableOpacity onPress={passos}>
-          <Button style={{ padding: 16, width: '100%' }} mode='contained'>Passos : 3452</Button>
-        </TouchableOpacity>
-
-      </View>
-      <View
-        style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-        <TouchableOpacity onPress={batimentocardiaco}>
-          <Button style={{ padding: 16, width: '100%' }} mode='contained'>Batimento Cardíaco : 80</Button>
-        </TouchableOpacity>
-      </View>
-      <View
-        style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-        <TouchableOpacity onPress={calorias}>
-          <Button style={{ padding: 16, width: '100%' }} mode='contained'>Calorias : 2489</Button>
-        </TouchableOpacity>
-      </View>
-      <View
-        style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-        <TouchableOpacity onPress={sono}>
-          <Button style={{ padding: 16, width: '100%' }} mode='contained'>Sono : 7h</Button>
-        </TouchableOpacity>
-      </View>
+          <Button style={{ padding: 16, width: '50%', margin:10 }} mode='contained' onPress={passos}>Passos : 3452</Button>
+          <Button style={{ padding: 16, width: '50%', margin:10 }} mode='contained' onPress={batimentocardiaco}>Batimento Cardíaco : 80</Button>
+          <Button style={{ padding: 16, width: '50%', margin:10 }} mode='contained' onPress={calorias}>Calorias : 2489</Button>
+          <Button style={{ padding: 16, width: '50%', margin:10 }} mode='contained' onPress={sono}>Sono : 7h</Button>
     </View>
   );
 

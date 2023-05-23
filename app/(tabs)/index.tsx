@@ -20,33 +20,11 @@ export default function TabOneScreen() {
   };
 
   return (
-    <View style={styles.container}>
-
-      <View
-        style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-        <TouchableOpacity onPress={dados}>
-          <Button style={{ padding: 16, width: '100%' }} mode='contained'>Dados de Saúde</Button>
-        </TouchableOpacity>
-
-      </View>
-      <View
-        style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-        <TouchableOpacity onPress={medicos}>
-          <Button style={{ padding: 16, width: '100%' }} mode='contained'>Médicos</Button>
-        </TouchableOpacity>
-      </View>
-      <View
-        style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-        <TouchableOpacity onPress={consultas}>
-          <Button style={{ padding: 16, width: '100%' }} mode='contained'>Consultas</Button>
-        </TouchableOpacity>
-      </View>
-      <View
-        style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-        <TouchableOpacity onPress={dispositivos}>
-          <Button style={{ padding: 16, width: '100%' }} mode='contained'>Dispositivos</Button>
-        </TouchableOpacity>
-      </View>
+    <View style={{...styles.container}}>
+          <Button style={{ padding: 16, width: '50%', margin: 10 }} mode='contained' onPress={dados}>Dados de Saúde</Button>
+          <Button style={{ padding: 16, width: '50%', margin: 10 }} mode='contained' onPress={medicos}>Médicos</Button>
+          <Button style={{ padding: 16, width: '50%', margin: 10 }} mode='contained' onPress={consultas}>Consultas</Button>
+          <Button style={{ padding: 16, width: '50%', margin: 10 }} mode='contained' onPress={dispositivos}>Dispositivos</Button>
     </View>
   );
 }
