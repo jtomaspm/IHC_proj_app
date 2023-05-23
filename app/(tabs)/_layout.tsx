@@ -2,6 +2,8 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Stack, Tabs, useNavigation } from 'expo-router';
 import { Pressable, useColorScheme } from 'react-native';
 
+import { DefaultTheme } from '@react-navigation/native';
+
 import Colors from '../../constants/Colors';
 import { Provider as PaperProvider } from 'react-native-paper';
 
@@ -21,7 +23,7 @@ export default function TabLayout() {
   navigation.setOptions({ headerTitle: 'Voltar' });
 
   return (
-    <PaperProvider>
+    <PaperProvider theme={DefaultTheme}>
     <Stack initialRouteName="index"/>
     </PaperProvider>
   );
