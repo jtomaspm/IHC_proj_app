@@ -26,7 +26,7 @@ export default function DispositivosScreen() {
     title: {
       fontSize: 40,
       fontWeight: 'bold',
-      color: 'white',
+      color: 'black',
     },
     floatingButton: {
       position: 'absolute',
@@ -101,10 +101,10 @@ export default function DispositivosScreen() {
       fontWeight: 'bold',
       height: 50,
       marginLeft: 100,
-      color: colorText,
+      color: "black",
     },
     dispositivos: {
-      color: colorText,
+      color: "black",
       marginRight: 20,
     },
     addButtonLabel: {
