@@ -3,12 +3,14 @@ import { Link, Stack, useNavigation } from 'expo-router';
 import { StyleSheet, Text, TouchableOpacity, View, Modal, ScrollView, TextInput } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Button, useTheme } from 'react-native-paper';
+import DatabaseService from '../../services/DatabaseService';
 
 
 export default function MedicosScreen() {
+  let db = DatabaseService.getInstance();
   const [modalVisible, setModalVisible] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [medicos, setMedicos] = useState([]);
+  const [medicos, setMedicos] = useState(db.medicos);
   const [medicoName, setMedicoName] = useState('');
   const [medicoSpecialty, setMedicoSpecialty] = useState('');
   const [medicoContact, setMedicoContact] = useState('');;
@@ -27,7 +29,9 @@ export default function MedicosScreen() {
         especialidade: medicoSpecialty,
         contacto: medicoContact,
       }
-      setMedicos([...medicos, medicos]);
+      db.addMedico(medico);
+      setMedicos(db.medicos);
+      console.log(medicos);
       setMedicoName('');
       setMedicoSpecialty('');
       setMedicoContact('');
@@ -41,6 +45,7 @@ export default function MedicosScreen() {
     const newMedicos = [...medicos];
     newMedicos.splice(index, 1);
     setMedicos(newMedicos);
+    db.medicos = newMedicos;
   };
 
   return (
@@ -49,13 +54,15 @@ export default function MedicosScreen() {
       {/* Este vai ser o container do nome do dispositivo e do botao remover */}
       <View >
         {medicos.map((medico, index) => (
-          <View style={styles.medicoContainer} key={medico.id}>
-            <Text style={styles.medicoName}>{medico.nome}</Text>
-            <Text style={styles.medicoSpecialty}>{medico.especialidade}</Text>
-            <Text style={styles.medicoType}>{medico.tipo}</Text>
+          <View key={medico.id}>
             <View>
-              <Text style={styles.remover} onPress={() => handleRemoveButtonPress(index)}>Remover</Text>
+              <Text >Nome: {medico.nome}</Text>
+              <Text >Especialidade: {medico.especialidade}</Text>
+              <Text >Contacto: {medico.contacto}</Text>
             </View>
+              <View>
+                <Text style={styles.remover} onPress={() => handleRemoveButtonPress(index)}>Remover</Text>
+              </View>
           </View>
 
         ))}
@@ -72,7 +79,7 @@ export default function MedicosScreen() {
         animationType='fade'
         onRequestClose={() => setModalVisible(false)}
       >
-        <View style={{backgroundColor:"white", margin:10, marginTop:"20%"}}>
+        <View style={styles.modalBackground}>
 
             <Button style={{width:10, alignSelf:"flex-end"}} onPress={() => setModalVisible(false)} mode='contained'>X</Button>
             <Text style={{...styles.titleModal}}>Adicionar médico</Text>
@@ -119,6 +126,7 @@ const styles = StyleSheet.create({
       fontSize: 18,
       backgroundColor: 'gray',
       width: '100%',
+      minWidth: 200,
       padding: 5,
       margin : 2,
       borderRadius: 10,
@@ -140,10 +148,13 @@ const styles = StyleSheet.create({
       fontSize: 25,
     },
     modalBackground: {
-      flex: 1,
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      maxWidth: '80%',
       alignItems: 'center',
       justifyContent: 'center',
+      margin: "auto",
+      backgroundColor: "white",
+      padding: 10,
+      alignSelf: 'center',
     },
     modalContent: {
       marginTop: 50,

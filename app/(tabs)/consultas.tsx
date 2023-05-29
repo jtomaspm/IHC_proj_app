@@ -1,23 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { Link, Stack, useNavigation } from 'expo-router';
+import React, { useState } from 'react';
+import { useNavigation } from 'expo-router';
 import { StyleSheet, Text, TouchableOpacity, View, Modal, ScrollView, TextInput } from 'react-native';
-import DropDownPicker from 'react-native-dropdown-picker';
 import { Button, useTheme } from 'react-native-paper';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import DropDownPicker from "react-native-dropdown-picker";
+import DatabaseService from '../../services/DatabaseService';
 
 
 export default function ConsultasScreen() {
+  let db = DatabaseService.getInstance();
   const [modalVisible, setModalVisible] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [consultas, setConsultas] = useState([]);
-  const [consultaData, setConsultaData] = useState('');
+  const [consultas, setConsultas] = useState(db.consultas);
+  const [consultaData, setConsultaData] = useState(new Date());
   const [consultaHospital, setConsultaHospital] = useState('');
   const [consultaSpecialty, setConsultaSpecialty] = useState('');
   const [consultaMedico, setConsultaMedico] = useState('');;
-  const theme = useTheme();
+  const [show, setShow] = useState(false);
+  const [mode, setMode] = useState('date');
   const navigation = useNavigation();
   navigation.setOptions({ headerTitle: 'Voltar' });
   
   
+  const [showMultiSelectDropDown, setShowMultiSelectDropDown] = useState(false);
+
 
   const handleAddButtonPress = () => {
     if (consultaData && consultaHospital && consultaSpecialty && consultaMedico) {
@@ -28,14 +34,15 @@ export default function ConsultasScreen() {
         hospital: consultaHospital,
         medico: consultaMedico,
       }
-      setConsultas([...consultas, consultas]);
-      setConsultaData('');
+      console.log(consultaData);
+      db.addConsulta(consulta);
+      setConsultas(db.consultas);
+      setConsultaData(new Date());
       setConsultaHospital('');
       setConsultaSpecialty('');
       setConsultaMedico('');
       setDropdownOpen(false);
       setModalVisible(false);
-      
     }
   };
 
@@ -43,18 +50,32 @@ export default function ConsultasScreen() {
     const newConsultas = [...consultas];
     newConsultas.splice(index, 1);
     setConsultas(newConsultas);
+    db.consultas = newConsultas;
+  };
+  const showMode = (currentMode) => {
+    setShow(false);
+    setMode(currentMode);
+  };
+  const showDatepicker = () => {
+    showMode('date');
+    setShow(true);
   };
 
+  const showTimepicker = () => {
+    showMode('time');
+      setShow(true);
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Consultas</Text>
       {/* Este vai ser o container do nome do dispositivo e do botao remover */}
       <View >
         {consultas.map((consulta, index) => (
-          <View style={styles.medicoContainer} key={consulta.id}>
-            <Text style={styles.medicoName}>{consulta.nome}</Text>
-            <Text style={styles.medicoSpecialty}>{consulta.especialidade}</Text>
-            <Text style={styles.medicoType}>{consulta.tipo}</Text>
+          <View  key={consulta.id}>
+            <Text >Data: {(consulta.data as Date).toUTCString()}</Text>
+            <Text >Especialidade: {consulta.especialidade}</Text>
+            <Text >Hospital: {consulta.hospital}</Text>
+            <Text >Medico: {consulta.medico}</Text>
             <View>
               <Text style={styles.remover} onPress={() => handleRemoveButtonPress(index)}>Remover</Text>
             </View>
@@ -74,43 +95,38 @@ export default function ConsultasScreen() {
         animationType='fade'
         onRequestClose={() => setModalVisible(false)}
       >
-        <TouchableOpacity
-          style={styles.modalBackground}
-          activeOpacity={1}
-          onPress={() => setDropdownOpen(false)}
-        >
-          <View style={styles.modalContent}>
-            <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisible(false)}>
-              <Text style={styles.closeButtonText}>X</Text>
-            </TouchableOpacity>
-            <Text style={styles.modalTitle}>Adicionar consulta</Text>
-
-            <View style={styles.container}>
-              <Text style={styles.label}>Data: </Text>
-              <TextInput style={styles.subTitle} value={consultaData} onChangeText={setConsultaData} />
-            </View>
-
-            <View style={styles.container}>
-            <Text style={styles.label}>Médico: </Text>
-              <TextInput style={styles.subTitle} value={consultaMedico} onChangeText={setConsultaMedico} />
-            </View>
-
-            <View style={styles.container}>
-            <Text style={styles.label}>Especialidade: </Text>
-              <TextInput style={styles.subTitle} value={consultaSpecialty} onChangeText={setConsultaSpecialty} />
-            </View>
-
-            <View style={styles.container}>
-            <Text style={styles.label}>Hospital: </Text>
-              <TextInput style={styles.subTitle} value={consultaHospital} onChangeText={setConsultaHospital} />
-            </View>
-
-            <TouchableOpacity style={styles.addButton} onPress={handleAddButtonPress}>
-              <Text style={styles.addButtonLabel}>Adicionar</Text>
-            </TouchableOpacity>
-
-          </View>
-        </TouchableOpacity>
+        <View style={styles.modalBackground}>
+            <Button style={{width:10, alignSelf:"flex-end"}} onPress={() => setModalVisible(false)} mode='contained'>X</Button>
+            <Text style={{...styles.titleModal}}>Adicionar consulta</Text>
+              <Button onPress={showDatepicker}>Data</Button>
+              <Button onPress={showTimepicker}>Hora</Button >
+            {show && <DateTimePicker
+              testID="dateTimePicker"
+              value={consultaData}
+              mode={mode}
+              is24Hour={true}
+              onChange={(event, date)=>{setConsultaData(date as Date); setShow(false)}}
+              onTouchEnd={()=>{setShow(false)}}
+              onTouchCancel={()=>{setShow(false)}}
+              />}
+            <Text style={styles.label} >Medico: </Text>
+            <DropDownPicker
+              open={showMultiSelectDropDown}
+              setOpen={() => setShowMultiSelectDropDown(true)}
+              onClose={() => setShowMultiSelectDropDown(false)}
+              value={consultaMedico}
+              setValue={(val) => {setConsultaMedico(val); setShowMultiSelectDropDown(false);}}
+              items={db.medicos.map((medico) => ({ label: medico.nome, value: medico.nome }))}
+              labelStyle={{backgroundColor: 'white'}}
+            />
+            <Text style={styles.label} >Especialidade: </Text>
+              <TextInput style={styles.inputs} value={consultaSpecialty} onChangeText={setConsultaSpecialty} />
+            <Text style={styles.label} >Hospital: </Text>
+              <TextInput style={styles.inputs} value={consultaHospital} onChangeText={setConsultaHospital} />
+              <Button style={{width:"60%", alignSelf:"center", margin:20}} onPress={() => {
+                handleAddButtonPress();
+                }} mode='contained'>Adicionar</Button>
+        </View>
       </Modal>
     </View>
   );
@@ -127,13 +143,21 @@ const styles = StyleSheet.create({
       color: 'black',
       marginTop: 10,
     },
-    subTitle: {
+    titleModal: {
+      fontSize: 30,
+      fontWeight: 'bold',
+      color: 'black',
+      marginTop: 10,
+      textAlign: 'center',
+    },
+    inputs: {
       borderStyle: 'solid',
       fontSize: 18,
-      marginBottom: 1,
       backgroundColor: 'gray',
       width: '100%',
+      minWidth: 200,
       padding: 5,
+      margin : 2,
       borderRadius: 10,
     },
     floatingButton: {
@@ -153,10 +177,13 @@ const styles = StyleSheet.create({
       fontSize: 25,
     },
     modalBackground: {
-      flex: 1,
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      maxWidth: '80%',
       alignItems: 'center',
       justifyContent: 'center',
+      margin: "auto",
+      backgroundColor: "white",
+      padding: 10,
+      alignSelf: 'center',
     },
     modalContent: {
       marginTop: 50,
@@ -212,7 +239,5 @@ const styles = StyleSheet.create({
     },
     label: {
       fontSize: 18,
-      marginBottom: 5,
-      alignSelf: 'flex-start',
     },
   });
